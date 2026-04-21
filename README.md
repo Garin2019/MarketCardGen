@@ -50,7 +50,7 @@
 ## Запуск проекта
 
 ### 1. Скачайте файлы приложения
-[Ссылка на скачивание zip архива] (https://github.com/Garin2019/MarketCardGen/archive/refs/heads/main.zip)
+- cсылка на скачивание zip архива: (https://github.com/Garin2019/MarketCardGen/archive/refs/heads/main.zip)
 
 
 ### 2. Установка Docker
