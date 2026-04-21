@@ -1,0 +1,444 @@
+{
+  "project": {
+    "name": "Конструктор карточек товаров",
+    "stack": ["React 18", "TypeScript", "Vite", "react-konva", "Zustand", "Tailwind CSS", "React Router v6"],
+    "deployment": "SPA (browser-only)",
+    "estimatedDays": 30
+  },
+  "priorities": [
+    {
+      "level": 1,
+      "name": "Редактор шаблонов",
+      "emoji": "🔥",
+      "sprints": [2, 3]
+    },
+    {
+      "level": 2,
+      "name": "Создание карточек",
+      "sprints": [5]
+    },
+    {
+      "level": 3,
+      "name": "Хранение шаблонов",
+      "sprints": [4]
+    },
+    {
+      "level": 4,
+      "name": "Экспорт PNG",
+      "sprints": [6]
+    }
+  ],
+  "sprints": [
+    {
+      "number": 1,
+      "name": "Инфраструктура",
+      "days": 4,
+      "priority": "critical",
+      "tasks": [
+        {
+          "id": "1.1",
+          "name": "Инициализация проекта",
+          "estimate": "3 дня",
+          "checklist": [
+            "npm create vite@latest с React + TypeScript",
+            "Установка зависимостей: zustand, react-konva, react-router-dom, file-saver, uuid",
+            "Настройка Tailwind CSS",
+            "Создание структуры папок",
+            "Определение TypeScript интерфейсов"
+          ],
+          "files": [
+            "package.json",
+            "tailwind.config.js",
+            "src/types/index.ts"
+          ]
+        },
+        {
+          "id": "1.2",
+          "name": "Роутинг и Layout",
+          "estimate": "1 день",
+          "checklist": [
+            "BrowserRouter + Routes для 6 страниц",
+            "Компонент Layout с навигацией",
+            "Заглушки для всех страниц"
+          ],
+          "files": [
+            "src/App.tsx",
+            "src/components/Layout.tsx",
+            "src/pages/*.tsx"
+          ]
+        }
+      ]
+    },
+    {
+      "number": 2,
+      "name": "Редактор шаблонов (основа)",
+      "days": 5,
+      "priority": 1,
+      "tasks": [
+        {
+          "id": "2.1",
+          "name": "Холст редактора",
+          "estimate": "2 дня",
+          "checklist": [
+            "Компонент TemplateEditorPage",
+            "Форма задания размера холста",
+            "react-konva Stage с масштабированием",
+            "Фон холста (сетка или шахматная доска)"
+          ],
+          "files": [
+            "src/pages/TemplateNewPage.tsx",
+            "src/components/TemplateCanvas.tsx"
+          ],
+          "dependencies": ["templateEditorStore"]
+        },
+        {
+          "id": "2.2",
+          "name": "Добавление контейнеров",
+          "estimate": "3 дня",
+          "checklist": [
+            "Zustand store для редактора",
+            "Кнопка Добавить блок",
+            "Рендер ContainerShape для каждого контейнера",
+            "Konva Transformer для drag & resize",
+            "Выделение контейнера кликом"
+          ],
+          "files": [
+            "src/store/templateEditorStore.ts",
+            "src/components/ContainerShape.tsx"
+          ]
+        }
+      ]
+    },
+    {
+      "number": 3,
+      "name": "Редактор шаблонов (настройки)",
+      "days": 6,
+      "priority": 1,
+      "tasks": [
+        {
+          "id": "3.1",
+          "name": "Панель свойств контейнера",
+          "estimate": "3 дня",
+          "checklist": [
+            "Компонент PropertiesPanel",
+            "Секция Форма: radio buttons для shape",
+            "Секция Фон: color picker + opacity slider",
+            "Секция Отступы: paddingX, paddingY inputs"
+          ],
+          "files": [
+            "src/components/PropertiesPanel.tsx"
+          ]
+        },
+        {
+          "id": "3.2",
+          "name": "Настройка шрифта",
+          "estimate": "2 дня",
+          "checklist": [
+            "Select семейства шрифта",
+            "Input размера шрифта",
+            "Color picker цвета текста",
+            "Checkboxes bold, italic",
+            "Input плейсхолдера"
+          ],
+          "files": [
+            "src/components/PropertiesPanel.tsx"
+          ]
+        },
+        {
+          "id": "3.3",
+          "name": "Управление слоями",
+          "estimate": "1 день",
+          "checklist": [
+            "Кнопки На передний план / На задний план",
+            "Логика moveContainerForward/Backward в store",
+            "Disabled состояние кнопок"
+          ],
+          "files": [
+            "src/store/templateEditorStore.ts",
+            "src/components/PropertiesPanel.tsx"
+          ]
+        }
+      ]
+    },
+    {
+      "number": 4,
+      "name": "Хранение шаблонов",
+      "days": 5,
+      "priority": 3,
+      "tasks": [
+        {
+          "id": "4.1",
+          "name": "Сохранение шаблона",
+          "estimate": "1 день",
+          "checklist": [
+            "Модальное окно SaveTemplateModal",
+            "Валидация уникальности имени",
+            "Генерация uuid и createdAt",
+            "Сохранение в templatesStore"
+          ],
+          "files": [
+            "src/components/SaveTemplateModal.tsx"
+          ]
+        },
+        {
+          "id": "4.2",
+          "name": "localStorage синхронизация",
+          "estimate": "2 дня",
+          "checklist": [
+            "Zustand store для шаблонов",
+            "utils/templateStorage.ts",
+            "Автоматическая синхронизация с localStorage",
+            "Загрузка при инициализации"
+          ],
+          "files": [
+            "src/store/templatesStore.ts",
+            "src/utils/templateStorage.ts"
+          ]
+        },
+        {
+          "id": "4.3",
+          "name": "Список шаблонов",
+          "estimate": "2 дня",
+          "checklist": [
+            "Компонент TemplatesPage",
+            "Grid карточек с превью",
+            "Кнопки Редактировать, Удалить",
+            "Empty state при отсутствии шаблонов",
+            "Экспорт/импорт JSON"
+          ],
+          "files": [
+            "src/pages/TemplatesPage.tsx"
+          ]
+        }
+      ]
+    },
+    {
+      "number": 5,
+      "name": "Создание карточек",
+      "days": 6,
+      "priority": 2,
+      "tasks": [
+        {
+          "id": "5.1",
+          "name": "Загрузка изображения",
+          "estimate": "2 дня",
+          "checklist": [
+            "Компонент ImageUploader",
+            "Drag-and-drop зона",
+            "Валидация типа и размера файла",
+            "Превью загруженного изображения",
+            "Сохранение в cardEditorStore"
+          ],
+          "files": [
+            "src/components/ImageUploader.tsx",
+            "src/utils/validation.ts"
+          ]
+        },
+        {
+          "id": "5.2",
+          "name": "Выбор шаблона",
+          "estimate": "1 день",
+          "checklist": [
+            "Компонент TemplateSelector",
+            "Grid превью шаблонов",
+            "Выбор → редирект на /card/edit"
+          ],
+          "files": [
+            "src/components/TemplateSelector.tsx",
+            "src/pages/CardNewPage.tsx"
+          ]
+        },
+        {
+          "id": "5.3",
+          "name": "Редактор карточки",
+          "estimate": "3 дня",
+          "checklist": [
+            "Zustand store для карточки",
+            "Компонент CardCanvas с 3 слоями",
+            "Ввод текста через textarea",
+            "Синхронизация textarea ↔ store",
+            "Рендер текста на canvas"
+          ],
+          "files": [
+            "src/store/cardEditorStore.ts",
+            "src/components/CardCanvas.tsx",
+            "src/pages/CardEditPage.tsx"
+          ]
+        }
+      ]
+    },
+    {
+      "number": 6,
+      "name": "Экспорт и финализация",
+      "days": 6,
+      "priority": 4,
+      "tasks": [
+        {
+          "id": "6.1",
+          "name": "Экспорт готовой карточки в PNG",
+          "estimate": "2 дня",
+          "checklist": [
+            "Функция exportPng в utils",
+            "FontFaceObserver для предзагрузки шрифтов",
+            "Конвертация canvas → Blob → saveAs",
+            "Loading state во время экспорта"
+          ],
+          "files": [
+            "src/utils/exportPng.ts",
+            "src/utils/fontLoader.ts"
+          ]
+        },
+        {
+          "id": "6.2",
+          "name": "Главная страница",
+          "estimate": "1 день",
+          "checklist": [
+            "Компонент StartPage",
+            "Hero секция",
+            "Условная активация кнопки Создать карточку",
+            "Empty state если нет шаблонов"
+          ],
+          "files": [
+            "src/pages/StartPage.tsx"
+          ]
+        },
+        {
+          "id": "6.3",
+          "name": "Тестирование и UX",
+          "estimate": "3 дня",
+          "checklist": [
+            "Ручное тестирование всех сценариев",
+            "Error Boundary",
+            "Loading states",
+            "Keyboard shortcuts (Delete, Escape, Ctrl+S)",
+            "Адаптивность",
+            "Toast notifications",
+            "Документация README"
+          ],
+          "files": [
+            "src/components/ErrorBoundary.tsx",
+            "README.md"
+          ]
+        }
+      ]
+    }
+  ],
+  "typeScriptInterfaces": {
+    "ShapeType": "type ShapeType = 'rect' | 'oval' | 'circle'",
+    "FontSettings": {
+      "family": "string",
+      "size": "number",
+      "color": "string",
+      "bold": "boolean",
+      "italic": "boolean"
+    },
+    "Container": {
+      "id": "string",
+      "shape": "ShapeType",
+      "x": "number",
+      "y": "number",
+      "width": "number",
+      "height": "number",
+      "zIndex": "number",
+      "bgColor": "string",
+      "bgOpacity": "number",
+      "paddingX": "number",
+      "paddingY": "number",
+      "font": "FontSettings",
+      "placeholder": "string"
+    },
+    "Template": {
+      "id": "string",
+      "name": "string",
+      "width": "number",
+      "height": "number",
+      "createdAt": "string",
+      "containers": "Container[]"
+    },
+    "CardState": {
+      "image": "string | null",
+      "selectedTemplateId": "string | null",
+      "containerTexts": "Record<string, string>"
+    }
+  },
+  "dependencies": {
+    "main": [
+      "react@^18.x",
+      "react-dom@^18.x",
+      "typescript@^5.x",
+      "vite@^5.x"
+    ],
+    "features": [
+      "zustand@^4.x",
+      "react-konva@^18.x",
+      "konva@^9.x",
+      "react-router-dom@^6.x",
+      "file-saver@^2.x",
+      "uuid@^9.x"
+    ],
+    "styles": [
+      "tailwindcss@^3.x",
+      "postcss@^8.x",
+      "autoprefixer@^10.x"
+    ],
+    "devDependencies": [
+      "@types/react@^18.x",
+      "@types/react-dom@^18.x",
+      "@types/uuid",
+      "@types/file-saver"
+    ]
+  },
+  "fileStructure": {
+    "src": {
+      "types": ["index.ts"],
+      "store": ["templatesStore.ts", "templateEditorStore.ts", "cardEditorStore.ts"],
+      "pages": [
+        "StartPage.tsx",
+        "TemplatesPage.tsx",
+        "TemplateNewPage.tsx",
+        "TemplateEditPage.tsx",
+        "CardNewPage.tsx",
+        "CardEditPage.tsx"
+      ],
+      "components": [
+        "Layout.tsx",
+        "TemplateCanvas.tsx",
+        "ContainerShape.tsx",
+        "PropertiesPanel.tsx",
+        "SaveTemplateModal.tsx",
+        "ImageUploader.tsx",
+        "TemplateSelector.tsx",
+        "CardCanvas.tsx",
+        "ErrorBoundary.tsx"
+      ],
+      "utils": [
+        "exportPng.ts",
+        "templateStorage.ts",
+        "validation.ts",
+        "fontLoader.ts"
+      ]
+    }
+  },
+  "risks": [
+    {
+      "title": "Шрифты на Canvas",
+      "description": "Шрифты могут не загрузиться до рендера",
+      "solution": "FontFaceObserver + ожидание загрузки, fallback на системные шрифты"
+    },
+    {
+      "title": "Большие изображения",
+      "description": "Изображения >10 МБ вызывают зависание",
+      "solution": "Валидация + сжатие через createImageBitmap или canvas resize"
+    },
+    {
+      "title": "localStorage лимит",
+      "description": "Переполнение при большом числе шаблонов",
+      "solution": "Не хранить base64 превью, генерировать динамически"
+    },
+    {
+      "title": "Производительность canvas",
+      "description": "Холсты >2000×2000 px тормозят",
+      "solution": "Ограничение макс. размера 1920×1080, виртуализация при >50 контейнерах"
+    }
+  ]
+}

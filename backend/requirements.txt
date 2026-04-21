@@ -1,0 +1,11 @@
+fastapi==0.135.1
+uvicorn[standard]==0.42.0
+python-multipart==0.0.22
+sqlmodel==0.0.37
+python-dotenv==1.2.2
+openpyxl==3.1.5
+httpx==0.28.1
+Pillow==12.1.1
+openai
+dashscope
+anthropic

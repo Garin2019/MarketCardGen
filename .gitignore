@@ -1,0 +1,21 @@
+# Env
+.env
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+venv/
+
+# Data (БД и загруженные файлы не коммитим)
+data/
+
+# Node
+node_modules/
+frontend/build/
+
+# IDE
+.idea/
+.vscode/
+*.DS_Store

@@ -1,0 +1,32 @@
+services:
+  backend:
+    build: ./backend
+    container_name: cardgen-backend
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./data:/app/data        # БД и загруженные файлы
+    env_file: .env
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8000/api/health')"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 15s
+
+  frontend:
+    build:
+      context: .
+      dockerfile: ./frontend/Dockerfile
+      args:
+        REACT_APP_EDITOR_URL: ${EDITOR_URL:-/editor/}
+    container_name: cardgen-frontend
+    ports:
+      - "3000:3000"
+    depends_on:
+      backend:
+        condition: service_healthy
+    restart: unless-stopped
+
+volumes: {}   # данные хранятся в ./data на хосте (volume в backend)
