@@ -19,3 +19,5 @@ frontend/build/
 .idea/
 .vscode/
 *.DS_Store
+
+README.md
