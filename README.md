@@ -49,7 +49,11 @@
 
 ## Запуск проекта
 
-### 1. Что нужно установить
+### 1. Скачайте файлы приложения
+[Ссылка на скачивание zip архива] (https://github.com/Garin2019/MarketCardGen/archive/refs/heads/main.zip)
+
+
+### 2. Установка Docker
 
 Перед запуском убедитесь, что на компьютере установлен Docker.
 Для Windows и macOS:
@@ -61,7 +65,7 @@
 - установите `Docker Compose Plugin`
 
 
-### 2. Подготовьте переменные окружения
+### 3. Подготовьте переменные окружения
 
 В корне проекта создайте файл `.env` на основе примера:
 
@@ -83,7 +87,7 @@ Copy-Item .env.example .env
 - `MAX_ACCESS_TOKEN`
 - `MAX_CHANNEL_ID`
 
-### 3. Запустите контейнеры
+### 4 Запустите контейнеры
 
 Убедитесь, что Docker запущен!
 
@@ -102,11 +106,10 @@ docker compose up --build
 - `stop-docker-app.bat` - остановка контейнеров через `docker compose down`
 
 
-### 4. Адреса для открытия приложения в браузере (после успешного запуска контейнера)
+### 5. Адреса для открытия приложения в браузере (после успешного запуска контейнера)
 
-- frontend: [http://localhost:3000](http://localhost:3000)
-- editor: [http://localhost:3000/editor/](http://localhost:3000/editor/)
-
+- основная ссылка: [http://localhost:3000](http://localhost:3000)
+- редактор инфографики: [http://localhost:3000/editor/](http://localhost:3000/editor/)
 
 
 ## Примечания
